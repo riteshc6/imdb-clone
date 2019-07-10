@@ -1,0 +1,10 @@
+{% extends 'imdb/base.html' %}
+    {% block content %}
+        {% for movie in movies %}
+            <div class="movie">
+                <p>published: {{ movie.date_published }}</p>
+                <h2><a href="{% url 'movie_detail' %}">{{ movie.title }}</a></h2>
+                <p>{{ movie.description|linebreaksbr }}</p>
+            </div>
+        {% endfor %}
+    {% endblock %}    
