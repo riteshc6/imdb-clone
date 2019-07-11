@@ -11,6 +11,7 @@ urlpatterns = [
     path('movies/add_movie/', views.add_movie, name='add_movie'),
     path('movies/<int:pk>/', views.movie_detail, name='movie_detail'),
     path('movies/<int:pk>/edit', views.edit_movie, name='edit_movie'),
+    path('movies/<int:pk>/add_review', views.add_review, name='add_review'),
 ]
 
 if settings.DEBUG:

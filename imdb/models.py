@@ -22,3 +22,6 @@ class Review(models.Model):
     time = models.DateTimeField(default=timezone.now)
     reviewer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+
+    class meta:
+        unique_together = ('movie', 'reviewer')
