@@ -11,7 +11,7 @@ class Movie(models.Model):
     director = models.CharField(max_length=60)
     description = models.TextField()
     date_published = models.DateTimeField(default=timezone.now)
-    image_path = models.CharField(max_length=120)
+    image_path = models.ImageField(upload_to='images/')
 
     def __str__(self):
         return self.title

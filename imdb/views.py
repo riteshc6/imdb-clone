@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
 from imdb.models import Movie, Review
+from imdb.forms import MovieUploadForm, EditUploadForm
 
 # Create your views here.
 def movie_list(request):
@@ -24,8 +25,32 @@ def signup(request):
 
 
 def add_movie(request):
-    pass    
+    if request.method == 'POST':
+        form = MovieUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            movie = form.save(commit=False)
+            movie.posted_by = request.user
+            movie.save()
+            return redirect('movie_list')
+    else:
+        form = MovieUploadForm()
+    return render(request, 'imdb/add_movie.html', {'form': form})
 
 
-def movie_detail(request):
-    pass
+def movie_detail(request, pk):
+    movie = get_object_or_404(Movie, pk=pk)
+    return render(request, 'imdb/movie_detail.html', {'movie': movie})
+
+
+def edit_movie(request, pk):
+    movie = get_object_or_404(Movie, pk=pk)
+    form = EditUploadForm(instance=movie)
+    if request.method == 'POST':
+        form = EditUploadForm(request.POST, instance=movie)
+        if form.is_valid():
+            print("valid ----------------------------------- ")
+            movie = form.save(commit=False)
+            movie.posted_by = request.user
+            movie.save()
+            return redirect('movie_detail', pk=pk)
+    return render(request, 'imdb/edit_movie.html', {'form': form})

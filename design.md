@@ -25,7 +25,7 @@
     * `/` or `/index` : Home Page(Displays list of movies)
     * `/login` : Login page(Displayed when user is not looged in)
     * `/register` : Resgistration Page
-    * `/movies/upload/` : Upload Movie form
+    * `/movies/add_movie/` : Upload Movie form
     * `/movies/<movie_id>` : Movie Detail Page and a form to review movie or edit if already reviewed
     * `/movies/<movie_id>/edit` : Edit movie details of the movies added by user     
     * `/movies/<movie_id>/review` : Post Url for submitting review

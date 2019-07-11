@@ -1,10 +1,17 @@
 {% extends 'imdb/base.html' %}
     {% block content %}
+
         {% for movie in movies %}
-            <div class="movie">
-                <p>published: {{ movie.date_published }}</p>
-                <h2><a href="{% url 'movie_detail' %}">{{ movie.title }}</a></h2>
-                <p>{{ movie.description|linebreaksbr }}</p>
+        <div style="display:flex">
+                <div>
+                    <img src="{{ movie.image_path.url }}" alt="movie.title" height=100 width=80>
+                </div>    
+                <div>
+                    <h5><a href="{% url 'movie_detail' pk=movie.pk %}">{{ movie.title }}</a></h5>
+                    <p>Stars : {{ movie.stars }}</p>
+                    <p>Director: {{ movie.director }}</p>
+                    <p>Description: {{ movie.description|linebreaksbr }}</p>
+                </div>
             </div>
         {% endfor %}
     {% endblock %}    
